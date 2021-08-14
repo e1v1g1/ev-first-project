@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #414b5f;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Message {
+  display: block;
+  width: 300px;
+  font-size: calc(3px + 2vmin);
+  color: rgb(43, 184, 97);
+}
+
+.MessageHeader {
+  font-size: calc(10px + 2vmin);
+}
