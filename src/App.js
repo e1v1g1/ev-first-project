@@ -1,16 +1,45 @@
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import Message from "./Message";
+import { Message } from "./components/Message";
+import { ChatForm } from "./components/ChatForm";
 
-const message =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.";
+function App() {
+  const text = "xxcvxc xcvxcvx xcvxcvx";
 
-function App(props) {
+  const [messageList, setMessageList] = useState([]);
+  const changeMessageList = (newMessage) => {
+    setMessageList([...messageList, newMessage]);
+  };
+
+  useEffect(() => {
+    if (messageList.length !== 0) {
+      const timer = setTimeout(() => {
+        alert(
+          "сообщение от " +
+            messageList[messageList.length - 1].chatAuthor +
+            " отправленно"
+        );
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [messageList]);
+
   return (
     <div className="App">
       <header className="App-header">
-        My first react app
-        <h3>Hello, {props.name}!</h3>
-        <Message message={message} />
+        <Message text={text} />
+        <div className="chatWindow container">
+          {messageList.map((el, i) => {
+            return (
+              <div key={i} className="chatMessage">
+                <p className="chatMessage-author">{el.chatAuthor}:</p>
+                <p className="chatMessage-text">{el.chatText}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <ChatForm changeMessageList={changeMessageList} />
       </header>
     </div>
   );

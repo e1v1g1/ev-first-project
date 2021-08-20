@@ -5,10 +5,7 @@
 .App-header {
   background-color: #414b5f;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -35,4 +32,34 @@
 
 .MessageHeader {
   font-size: calc(10px + 2vmin);
+}
+
+.chatWindow {
+  font-size: 13pt;
+}
+
+.chatMessage {
+  display: flex;
+  justify-content: center;
+}
+
+.chatMessage-author {
+  font-weight: 900;
+  margin-right: 10px;
+}
+
+.chatInput {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.chatInput__author {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.chatInput__text {
+  height: 30px;
+  margin-right: 10px;
 }
