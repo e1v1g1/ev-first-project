@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.App {
+    background-color: rgb(233, 233, 247);
+    height: 100vh;
+}
+.Message {
+    font-size: 18px;
+    text-align: center;
+    padding-top: 80px;
+}
+.container {
+    width: 1020px;
+    margin: 0 auto;
+}
+.navPanel {
+    height: 48px;
+    background-color: rgb(104, 104, 241);
+    display: flex;
+    align-items: center;
+    &__box {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+    }
+    &__list {
+        flex-grow: 1;
+        height: 100%;
+    }
+    &__link {
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 18px;
+        border: 1px solid rgb(44, 44, 172);
+    }
+}
+.chatWindow {
+    display: flex;
+    border: 1px solid rgb(44, 44, 172);
+    border-radius: 16px;
+    &__messageWindow {
+        flex-grow: 1;
+        padding: 5px;
+    }
+    &__chatList {
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
+    }
+    &__messageList {
+        background-color: #fff;
+        height: 400px;
+        overflow-y: auto;
+    }
+}
+.chatMessage {
+    min-width: 50px;
+    max-width: 80%;
+    background-color: rgb(181, 182, 241);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px;
+    width: fit-content;
+
+    &__author {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    &__text {
+        font-size: 14px;
+    }
+}
+.chatInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.chatList {
+    width: 270px;
+    background-color: rgb(222, 218, 252);
+    overflow-y: auto;
+    &__user {
+        margin: 10px;
+        height: 36px;
+        width: 230px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid rgb(98, 98, 243);
+        border-radius: 8px;
+    }
+}
