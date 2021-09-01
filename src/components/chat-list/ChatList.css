@@ -1,0 +1,9 @@
+.chat-list {
+  min-width: 300px;
+  border: solid 1px rgba(165, 208, 243, 0.986);
+}
+
+.chat {
+  border-radius: 10px;
+  width: 30%;
+}

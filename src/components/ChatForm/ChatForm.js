@@ -1,40 +1,70 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { TextField } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import Icon from "@material-ui/core/Icon";
+import "./ChatForm.css";
 
-export const ChatForm = (props) => {
-  const [chatMessage, setChatMessage] = useState({
-    chatAuthor: "",
-    chatText: "",
-  });
+export const ChatForm = ({ list, onSubmit }) => {
+  const [contact, setContact] = useState("");
+  const [text, setText] = useState("");
 
-  const handleChangeAuthor = (e) => {
-    setChatMessage({ ...chatMessage, chatAuthor: e.target.value });
+  const inputRef = useRef(null);
+
+  const theme = useTheme();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [list]);
+
+  const handleButtonClick = () => {
+    onSubmit({ contact, text });
+
+    setContact("");
+    setText("");
   };
 
-  const handleChangeMessage = (e) => {
-    setChatMessage({ ...chatMessage, chatText: e.target.value });
+  const handleChangeContact = (e) => {
+    setContact(e.target.value);
   };
 
-  const handleSubmit = () => {
-    props.changeMessageList(chatMessage);
-    setChatMessage({ chatAuthor: "", chatText: "" });
+  const handleChangeText = (e) => {
+    setText(e.target.value);
   };
+
   return (
-    <div className="chatInput container">
-      <input
-        type="text"
-        placeholder="author"
-        className="chatInput__author"
-        onChange={handleChangeAuthor}
-        value={chatMessage.chatAuthor}
-      ></input>
-      <textarea
-        type="text"
-        placeholder="text"
-        className="chatInput__text"
-        onChange={handleChangeMessage}
-        value={chatMessage.chatText}
-      ></textarea>
-      <button onClick={handleSubmit}>submit</button>
+    <div className="Form">
+      <TextField
+        className="Form-text"
+        id="standard-full"
+        style={{ padding: 10 }}
+        placeholder="Type the message"
+        value={text}
+        onChange={handleChangeText}
+        inputRef={inputRef}
+      />
+      <TextField
+        className="Form-author"
+        id="standard"
+        style={{ padding: 10 }}
+        value={contact}
+        placeholder="Name"
+        onChange={handleChangeContact}
+      />
+      <Button
+        className="Form-btn"
+        variant="contained"
+        endIcon={<Icon>send</Icon>}
+        onClick={handleButtonClick}
+        style={{
+          paddingLeft: 10,
+          paddingRight: 10,
+          backgroundColor: theme.palette.primary.main,
+          color: "white",
+        }}
+      >
+        Send
+      </Button>
     </div>
   );
 };

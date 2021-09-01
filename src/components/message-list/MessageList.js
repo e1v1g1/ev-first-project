@@ -1,27 +1,15 @@
-import { useState } from "react";
+import "./MessageList.css";
 
-export const MessageList = () => {
-  const [list, setList] = useState(["text1", "text2", "text3"]);
-
-  //const handleClick = () => {};
-
+export const MessageList = ({ list }) => {
   return (
-    <div>
-      {list.map((element) => {
-        return <div>{element}</div>;
+    <div className="message-list">
+      {list.map((message) => {
+        return (
+          <span className="message" key={message.id}>
+            {message.text}
+          </span>
+        );
       })}
     </div>
   );
-};
-
-export const MessageList1 = () => {
-  const [messages, setMessages] = useState([
-    "Message1",
-    "Message2",
-    "Message3",
-  ]);
-
-  //const handleClick = () => {};
-
-  return messages.map((message) => <div>{message}</div>);
 };

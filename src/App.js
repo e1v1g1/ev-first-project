@@ -1,48 +1,68 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { Message } from "./components/Message";
+import { useCallback, useEffect, useState } from "react";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { MessageList } from "./components/message-list";
 import { ChatForm } from "./components/ChatForm";
+import { ChatList } from "./components/chat-list";
+import "./App.css";
 
-function App() {
-  const text = "xxcvxc xcvxcvx xcvxcvx";
+const App = () => {
+  const [list, setList] = useState([]);
 
-  const [messageList, setMessageList] = useState([]);
-  const changeMessageList = (newMessage) => {
-    setMessageList([...messageList, newMessage]);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#a6d1f3",
+      },
+      secondary: {
+        main: "#a6d1f3",
+      },
+    },
+  });
+
+  const getId = () => {
+    return Math.random();
   };
 
+  const onSubmit = useCallback(
+    ({ contact, text }) => {
+      let message = {
+        id: getId(),
+        contact: contact,
+        text: text,
+      };
+
+      setList([...list, message]);
+    },
+    [list]
+  );
+
   useEffect(() => {
-    if (messageList.length !== 0) {
-      const timer = setTimeout(() => {
-        alert(
-          "сообщение от " +
-            messageList[messageList.length - 1].chatAuthor +
-            " отправленно"
-        );
-      }, 1500);
-      return () => clearTimeout(timer);
+    if (list.length) {
+      const lastContact = list[list.length - 1].contact;
+      const timer = setTimeout(
+        () => alert(`Your message to ${lastContact} sent successefily.`),
+        1500
+      );
+
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  }, [messageList]);
+  }, [list]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Message text={text} />
-        <div className="chatWindow container">
-          {messageList.map((el, i) => {
-            return (
-              <div key={i} className="chatMessage">
-                <p className="chatMessage-author">{el.chatAuthor}:</p>
-                <p className="chatMessage-text">{el.chatText}</p>
-              </div>
-            );
-          })}
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <div className="App-main">
+          <ChatList list={list} />
+          <div className="App-right">
+            <MessageList list={list} />
+            <ChatForm list={list} onSubmit={onSubmit} />
+          </div>
         </div>
-
-        <ChatForm changeMessageList={changeMessageList} />
-      </header>
-    </div>
+      </div>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
